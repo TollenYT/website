@@ -1,4 +1,5 @@
 import "./header.css"
+import banner from "./../../image/banner.jpg"
 
 export default function Header() {
     return (
@@ -7,7 +8,7 @@ export default function Header() {
                <span className="headerTitleSm">React & Node</span>
                <span className="headerTitleLg">Blog</span>
            </div>
-           <img className="headerImg" src="" alt=""/>
+           <img className="headerImg" src={banner} alt="missing img"/>
         </div>
     )
 }
