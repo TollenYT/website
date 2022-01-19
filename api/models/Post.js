@@ -6,11 +6,6 @@ const PostSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    email: {
-        type: String,
-        required: true,
-        unique: true
-    },
     desc: {
         type: String,
         required: true
