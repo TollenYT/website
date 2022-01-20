@@ -1,26 +1,42 @@
 import "./singlePost.css"
-import image from "./../../image/banner.jpg"
+import { useLocation } from "react-router-dom"
+import { useEffect } from "react"
+import axios from "axios"
+import { useState } from "react"
+
 
 export default function SinglePost() {
+    const location = useLocation()
+    const path = location.pathname.split("/")[2];
+    const [post, setPost] = useState({})
+
+    useEffect(()=>{
+        const getPost = async ()=>{
+            const res = await axios.get("/posts/" + path)
+            setPost(res.data)
+        }
+        getPost()
+    },[path]);
     return (
         <div className="singlePost">
             <div className="singlePostWrapper">
-                <img className="singlePostImg" src={image} alt="missing img" />
+                {post.photo && (
+                    <img className="singlePostImg" src={post.photo} alt="missing img" />
+                )}
+                
                 <h1 className="singlePostTitle">
-                    Lorem ipsum dolor sit amet.
+                    {post.title}
                     <div className="singlePostEdit">
                         <i className="singlePostIcon fas fa-edit"></i>
                         <i className="singlePostIcon fas fa-trash-alt"></i>
                     </div>
                 </h1>
                 <div className="singlePostInfo">
-                    <span className="singlePostAuthor">Author: <b>Severin</b></span>
-                    <span className="singlePostDate">1 hour ago</span>
+                    <span className="singlePostAuthor">Author: <b>{post.username}</b></span>
+                    <span className="singlePostDate">{new Date(post.createdAt).toDateString()}</span>
                 </div>
                 <p className="singlePostDesc">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora voluptatum, repudiandae dicta, nostrum nisi amet natus, et quae consequatur adipisci odio? Esse voluptas vero magni omnis accusantium quaerat nobis.
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora voluptatum, repudiandae dicta, nostrum nisi amet natus, et quae consequatur adipisci odio? Esse voluptas vero magni omnis accusantium quaerat nobis.
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora voluptatum, repudiandae dicta, nostrum nisi amet natus, et quae consequatur adipisci odio? Esse voluptas vero magni omnis accusantium quaerat nobis.
+                    {post.desc}
                 </p>
             </div>
         </div>
