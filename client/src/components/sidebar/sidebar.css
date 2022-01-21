@@ -62,3 +62,6 @@
     margin-left: 10px;
     cursor: pointer;
 }
+.sidebarImg{
+  max-width: 50%;
+}
