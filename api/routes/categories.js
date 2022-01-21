@@ -1,6 +1,7 @@
 const Category = require("../models/Category");
 const router = require("express").Router();
 
+// new Category
 router.post("/", async (req,res) =>{
     const newCat = new Category(req.body);
     try{
@@ -12,6 +13,7 @@ router.post("/", async (req,res) =>{
     }
 })
 
+// get all Categories
 router.get("/", async (req,res) =>{
     try{
         const cats = await Category.find();

@@ -11,11 +11,13 @@ const multer = require("multer");
 dotenv.config();
 app.use(express.json());
 
+// connnect to mongodb
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(console.log("Connected to MongoDB")).catch(err => console.log(err))
 
+// multer for saving images
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, "images")
